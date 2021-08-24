@@ -1,0 +1,71 @@
+server:
+  port:8082
+
+spring:
+  profiles:
+    active:qa
+
+---
+
+spring:
+  profiles:dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    url: jdbc:mysql://localhost:3306/dcbapp
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+welcome:
+  message: Hello Spring Boot
+
+---
+
+spring:
+  profiles:qa
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    url: jdbc:mysql://localhost:3306/dcbapp-qa
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+welcome:
+  message: Hello Spring Boot
+
+#Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans" #Excluding these endpoints
+
+---
+
+spring:
+  profiles:prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    url: jdbc:mysql://localhost:3306/dcbapp-prod
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+welcome:
+  message: Hello Spring Boot
